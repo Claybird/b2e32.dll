@@ -1,0 +1,149 @@
+LIBRARY         B2E32    ; Application's module name
+;DESCRIPTION     'B2E Script Library'
+
+EXPORTS
+		B2E							@1
+		B2EGetVersion				@2
+		B2EGetCursorMode			@3
+		B2ESetCursorMode			@4
+		B2EGetBackGroundMode		@5
+		B2ESetBackGroundMode		@6
+		B2EGetCursorInterval		@7
+		B2ESetCursorInterval		@8
+
+		B2EGetRunning				@10
+		B2EConfigDialog				@11
+		B2ECheckArchive				@12
+;		B2EGetArchiveType			@13
+
+		B2EGetFileCount				@17
+		B2EQueryFunctionList		@18
+
+		B2EOpenArchive				@21
+		B2ECloseArchive				@22
+		B2EFindFirst				@23
+		B2EFindNext					@24
+
+		B2EGetArcFileName			@31
+		B2EGetArcFileSize			@32
+		B2EGetArcOriginalSize		@33
+		B2EGetArcCompressedSize		@34
+		B2EGetArcRatio				@35
+		B2EGetArcDate				@36
+		B2EGetArcTime				@37
+		B2EGetArcOSType				@38
+		B2EIsSFXFile				@39
+		B2EGetFileName				@40
+		B2EGetOriginalSize			@41
+		B2EGetCompressedSize		@42
+		B2EGetRatio					@43
+		B2EGetDate					@44
+		B2EGetTime					@45
+		B2EGetCRC					@46
+		B2EGetAttribute				@47
+		B2EGetOSType				@48
+
+		B2EGetMethod				@61
+		B2EGetWriteTime				@62
+		B2EGetCreateTime			@63
+		B2EGetAccessTime			@64
+		B2EGetWriteTimeEx			@65
+		B2EGetCreateTimeEx			@66
+		B2EGetAccessTimeEx			@67
+		B2EGetArcCreateTimeEx		@68
+		B2EGetArcAccessTimeEx		@69
+		B2EGetArcWriteTimeEx		@70
+
+
+		B2ESetOwnerWindow			@90
+		B2EClearOwnerWindow			@91
+		B2ESetOwnerWindowEx			@92
+		B2EKillOwnerWindowEx		@93
+		B2EGetSubVersion			@94
+
+		B2EGetArcFileSizeEx			@103
+		B2EGetArcOriginalSizeEx		@104
+		B2EGetArcCompressedSizeEx	@105
+		B2EGetOriginalSizeEx		@106
+		B2EGetCompressedSizeEx		@107
+		B2ESetOwnerWindowEx64		@108
+		B2EKillOwnerWindowEx64		@109
+
+
+
+		BtoE						@700
+		BtoEGetVersion				@701
+		BtoEGetCursorMode			@702
+		BtoESetCursorMode			@703
+		BtoEGetBackGroundMode		@704
+		BtoESetBackGroundMode		@705
+		BtoEGetCursorInterval		@706
+		BtoESetCursorInterval		@707
+
+		BtoEGetRunning				@710
+		BtoEConfigDialog			@711
+		BtoECheckArchive			@712
+;		BtoEGetArchiveType			@713
+
+		BtoEGetFileCount			@717
+		BtoEQueryFunctionList		@718
+
+		BtoEOpenArchive				@721
+		BtoECloseArchive			@722
+		BtoEFindFirst				@723
+		BtoEFindNext				@724
+
+		BtoEGetArcFileName			@731
+		BtoEGetArcFileSize			@732
+		BtoEGetArcOriginalSize		@733
+		BtoEGetArcCompressedSize	@734
+		BtoEGetArcRatio				@735
+		BtoEGetArcDate				@736
+		BtoEGetArcTime				@737
+		BtoEGetArcOSType			@738
+		BtoEIsSFXFile				@739
+		BtoEGetFileName				@740
+		BtoEGetOriginalSize			@741
+		BtoEGetCompressedSize		@742
+		BtoEGetRatio				@743
+		BtoEGetDate					@744
+		BtoEGetTime					@745
+		BtoEGetCRC					@746
+		BtoEGetAttribute			@747
+		BtoEGetOSType				@748
+
+		BtoEGetMethod				@761
+		BtoEGetWriteTime			@762
+		BtoEGetCreateTime			@763
+		BtoEGetAccessTime			@764
+		BtoEGetWriteTimeEx			@765
+		BtoEGetCreateTimeEx			@766
+		BtoEGetAccessTimeEx			@767
+		BtoEGetArcCreateTimeEx		@768
+		BtoEGetArcAccessTimeEx		@769
+		BtoEGetArcWriteTimeEx		@770
+
+
+		BtoESetOwnerWindow			@790
+		BtoEClearOwnerWindow		@791
+		BtoESetOwnerWindowEx		@792
+		BtoEKillOwnerWindowEx		@793
+		BtoEGetSubVersion			@794
+
+		BtoEGetArcFileSizeEx		@803
+		BtoEGetArcOriginalSizeEx	@804
+		BtoEGetArcCompressedSizeEx	@805
+		BtoEGetOriginalSizeEx		@806
+		BtoEGetCompressedSizeEx		@807
+		BtoESetOwnerWindowEx64		@808
+		BtoEKillOwnerWindowEx64		@809
+
+		B2ESetScriptDirectory				@1000
+		B2EScriptGetCount					@1001
+		B2EScriptGetName					@1002
+		B2EScriptGetAbility					@1003
+		B2EScriptGetExtractExtensions		@1004
+		B2EScriptGetCompressType			@1005
+		B2EScriptGetCompressMethod			@1006
+		B2EScriptGetDefaultCompressMethod	@1007
+		B2EScriptGetExtractorIndex			@1008

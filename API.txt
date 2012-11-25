@@ -1,0 +1,169 @@
+=================================================================
+B2E32.dll API説明書 by Claybird <claybird.without.wing@gmail.com>
+                              http://claybird.sakura.ne.jp/
+=================================================================
+                                                    April.15,2012
+
+=================================================
+Unlha32.dll互換API
+  これらのAPIにはBtoEで始まる別名APIが存在します
+=================================================
+
+・値を保存するだけで実際の動作には一切影響しないAPI
+BOOL WINAPI B2EGetBackGroundMode(VOID);
+BOOL WINAPI B2ESetBackGroundMode(const BOOL _BackGroundMode);
+BOOL WINAPI B2EGetCursorMode(VOID);
+BOOL WINAPI B2ESetCursorMode(const BOOL _CursorMode);
+WORD WINAPI B2EGetCursorInterval(VOID);
+BOOL WINAPI B2ESetCursorInterval(const WORD _Interval);
+
+
+・中身の実装されたAPI
+WORD WINAPI B2EGetVersion(VOID);
+WORD WINAPI B2EGetSubVersion(VOID);
+BOOL WINAPI B2EGetRunning(VOID);
+
+int WINAPI B2E(const HWND _hwnd, LPCSTR _szCmdLine,LPSTR _szOutput, const DWORD _dwSize);
+BOOL WINAPI B2ECheckArchive(LPCSTR _szFileName, const int _iMode);
+int WINAPI B2EGetFileCount(LPCSTR _szArcFile);
+BOOL WINAPI B2EConfigDialog(const HWND _hwnd, LPSTR _lpszComBuffer,const int _iMode);
+BOOL WINAPI B2EQueryFunctionList(const int _iFunction);
+
+
+HARC WINAPI B2EOpenArchive(const HWND _hwnd, LPCSTR _szFileName,const DWORD _dwMode);
+int WINAPI B2ECloseArchive(HARC _harc);
+int WINAPI B2EFindFirst(HARC _harc, LPCSTR _szWildName,INDIVIDUALINFO *_lpSubInfo);
+int WINAPI B2EFindNext(HARC _harc, INDIVIDUALINFO *_lpSubInfo);
+int WINAPI B2EGetArcFileName(HARC _harc, LPSTR _lpBuffer,const int _nSize);
+int WINAPI B2EGetFileName(HARC _harc, LPSTR _lpBuffer,const int _nSize);
+
+※以下のAPIは統合アーカイバプロジェクト仕様DLLを利用する場合のみ成功します
+int WINAPI B2EGetMethod(HARC _harc, LPSTR _lpBuffer,const int _nSize);
+DWORD WINAPI B2EGetOriginalSize(HARC _harc);
+DWORD WINAPI B2EGetCompressedSize(HARC _harc);
+WORD WINAPI B2EGetRatio(HARC _harc);
+WORD WINAPI B2EGetDate(HARC _harc);
+WORD WINAPI B2EGetTime(HARC _harc);
+DWORD WINAPI B2EGetCRC(HARC _harc);
+int WINAPI B2EGetAttribute(HARC _harc);
+int WINAPI B2EGetAttributes(HARC _harc);
+
+
+=================================================
+B2E32.DLL独自API
+  これらのAPIには別名APIは存在しません
+=================================================
+
+-----------------------------------
+BOOL WINAPI B2ESetScriptDirectory(LPCSTR _szDirectory);
+-----------------------------------
+  B2Eスクリプトのあるディレクトリを指定
+
+-----------------------------------
+int WINAPI B2EScriptGetCount();
+-----------------------------------
+  B2Eスクリプトの数を取得
+  エラー時には-1が返ります。
+
+-----------------------------------
+BOOL WINAPI B2EScriptGetName(const UINT _nIndex,LPSTR _szName,const DWORD _dwSize);
+-----------------------------------
+  B2Eスクリプト名を取得:
+    _nIndex:B2Eスクリプトを指定するインデックス(0オリジン)
+
+
+-----------------------------------
+BOOL WINAPI B2EScriptGetAbility(const UINT _nIndex,LPWORD _lpAbility);
+-----------------------------------
+  B2Eスクリプトの能力を列挙:
+    _nIndex:B2Eスクリプトを指定するインデックス(0オリジン)
+    _lpAbility:能力
+
+  能力の値は以下の組み合わせ(OR)です。
+ABILITY_CHECK       1       CheckArchive()相当の処理が可能
+ABILITY_MELT        2       解凍処理が可能
+ABILITY_LIST        4       書庫内ファイルの列挙が可能
+ABILITY_MELT_EACH   8       指定したファイルのみの解凍が可能
+ABILITY_COMPRESS    16      圧縮が可能
+ABILITY_ARCHIVE     32      複数ファイルをまとめることが可能(ex.GZip)
+ABILITY_SFX         64      自己解凍ファイルを作成可能
+ABILITY_ADD         128     ファイルの追加が可能
+ABILITY_DELETE      256     ファイルの削除が可能
+
+-----------------------------------
+BOOL WINAPI B2EScriptGetExtractExtensions(const UINT _nIndex,const UINT _nExtIndex,LPSTR _szExt,const DWORD _dwSize);
+-----------------------------------
+  解凍できる拡張子('.'付き)の_nExtIndex番目のものを取得
+    _nIndex:B2Eスクリプトを指定するインデックス(0オリジン)
+    _nExtIndex:対応拡張子のインデックス(0オリジン)
+
+
+-----------------------------------
+BOOL WINAPI B2EScriptGetCompressType(const UINT _nIndex,LPSTR _szType,const DWORD _dwSize);
+-----------------------------------
+  B2Eの圧縮対応形式名を取得(拡張子名でないことに注意)
+    _nIndex:B2Eスクリプトを指定するインデックス(0オリジン)
+    _szType:形式名
+
+-----------------------------------
+BOOL WINAPI B2EScriptGetCompressMethod(const UINT _nIndex,const UINT _nMthdIndex,LPSTR _szMethod,const DWORD _dwSize);
+-----------------------------------
+  圧縮用B2Eの対応メソッドを取得
+    _nIndex:B2Eスクリプトを指定するインデックス(0オリジン)
+    _nMthdIndex:メソッドの番号
+    _szMethod:メソッド名
+
+-----------------------------------
+int WINAPI B2EScriptGetDefaultCompressMethod(const UINT _nIndex);
+-----------------------------------
+  圧縮用B2Eのデフォルトメソッド番号を取得
+    _nIndex:B2Eスクリプトを指定するインデックス(0オリジン)
+    _szMethod:メソッド名
+  エラー時には-1が返ります。
+
+-----------------------------------------------------------------------
+UINT WINAPI B2EScriptGetExtractorIndex(LPCSTR _szFileName)
+-----------------------------------------------------------------------
+  指定したアーカイブファイルの解凍に使うB2Eのインデックスを取得
+    _szFileName  チェックすべきアーカイブファイルのファイル名
+戻り値
+    非負                 B2Eスクリプトのインデックス
+    0xFFFFFFFF           エラー、もしくは現在利用可能なB2Eスクリプトで扱えないファイル
+
+
+=================================================
+サンプルコード
+=================================================
+    const int ScriptCount=B2EScriptGetCount();  //スクリプトの数を取得
+    printf("Script count=%d\n",ScriptCount);
+    for(int i=0;i<ScriptCount;i++){
+        printf("------\n");
+
+        char Buffer[_MAX_PATH+1];
+        B2EScriptGetName(i,Buffer,_MAX_PATH);   //名前を取得
+        printf("Script name:%s\n",Buffer);
+
+        WORD ability;
+        B2EScriptGetAbility(i,&ability);        //能力を取得
+        printf("Ability is %d\n",ability);
+
+        int index=0;
+        printf("Can Extract:\n");
+        while(B2EScriptGetExtractExtensions(i,index,Buffer,_MAX_PATH)){
+            printf("%s\n",Buffer);              //解凍可能な拡張子を列挙
+            index++;
+        }
+
+        B2EScriptGetCompressType(i,Buffer,_MAX_PATH);   //圧縮形式名を取得
+        printf("CompressType:%s\n",Buffer);
+
+        index=0;
+        printf("Supported methods are:\n");
+        while(B2EScriptGetCompressMethod(i,index,Buffer,_MAX_PATH)){
+            printf("%s\n",Buffer);              //圧縮メソッド名を取得
+            index++;
+        }
+
+        printf("Default Method :%d\n",B2EScriptGetDefaultCompressMethod(i));
+                //デフォルト圧縮メソッド番号を取得
+    }
